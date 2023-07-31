@@ -1,6 +1,10 @@
 const attendAssignment = async (req, res) => {
     const { con } = req;
     const { assignmentId, full_name, answer } = req.body;
+
+    if (!assignmentId || !full_name || !answer) {
+      return res.status(400).json({ error: 'All Fields are mandatory' });
+  }
   
     // Check if the assignmentId exists
     con.query("SELECT * FROM assignments WHERE id=?", [assignmentId], (err, results) => {

@@ -4,6 +4,10 @@ const createAssignment = async (req, res) => {
         const { con } = req;
         const { faculty_name, title, subject, question, options, correct_answer } = req.body;
 
+        if (!faculty_name || !title || !subject || !question || !options || !correct_answer) {
+            return res.status(400).json({ error: 'All Fields are mandatory' });
+        } 
+
         const optionsJson = JSON.stringify(options);
         const correctAnswersJson = JSON.stringify(correct_answer);
 
